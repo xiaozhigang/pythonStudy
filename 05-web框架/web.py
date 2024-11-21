@@ -13,7 +13,8 @@ class HttpWebServer:
       tcp_server_socket.listen(128)
       self.tcp_server_socket = tcp_server_socket
 
-    def handle_client_request(self, new_socket):
+    @staticmethod
+    def handle_client_request(new_socket):
         recv_data = new_socket.recv(4096)
         if len(recv_data) == 0:
             new_socket.close()

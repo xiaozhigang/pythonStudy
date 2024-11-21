@@ -1,7 +1,5 @@
 import time
-from http.cookiejar import request_path
 
-from OpenSSL.rand import status
 
 
 def index():
