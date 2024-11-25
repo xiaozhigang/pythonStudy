@@ -28,7 +28,7 @@ class HttpWebServer:
         print(request_path)
 
         if request_path == '/':
-            response_content = '/index.html'
+            request_path = '/index.html'
 
         if request_path.endswith('.html'):
             """动态请求"""
@@ -52,16 +52,16 @@ class HttpWebServer:
                 with open("static" + request_path, "rb") as file:
                     file_data = file.read()
             except Exception as ret:
-                response_line = "404 not found".encode("utf-8")
-                response_header = "Server: PWS/1.1".encode("utf-8")
+                response_line = "HTTP/1.1 404 not found \r\n".encode("utf-8")
+                response_header = "Server: PWS/1.1 \r\n".encode("utf-8")
                 with open("static/error.html", "rb") as file:
                     file_data = file.read()
                 response_content = file_data
                 response = (response_line + response_header + "\r\n".encode("utf-8") + response_content)
                 new_socket.send(response)
             else:
-                response_line = "HTTP/1.1 200 OK".encode("utf-8")
-                response_header = "Server: PWS/1.1".encode("utf-8")
+                response_line = "HTTP/1.1 200 OK \r\n".encode("utf-8")
+                response_header = "Server: PWS/1.1 \r\n".encode("utf-8")
                 response_content = file_data
                 response = (response_line + response_header + "\r\n".encode("utf-8") + response_content)
 
